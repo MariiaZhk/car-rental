@@ -96,6 +96,8 @@ export const BtnContainer = styled.div`
   display: flex;
 `;
 export const Btn = styled.button`
+  /* position: absolute;
+  bottom: 0; */
   display: flex;
   justify-content: center;
   width: 100%;
