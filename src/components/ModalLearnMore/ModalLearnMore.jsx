@@ -1,13 +1,17 @@
 import { useEffect } from "react";
 import {
   Backdrop,
+  Button,
   CardModalContainer,
+  CloseBtnWrap,
   Description,
   Image,
   ImgDescriptionWrapper,
   Modal,
   ModalImgWrapper,
   ParagraphDescription,
+  RentalConditionsItem,
+  RentalConditionsList,
   Subtitle,
   TitleModal,
   TotalDescriptionWrap,
@@ -18,6 +22,7 @@ import {
   Item,
   Span,
 } from "../CarItem/CarItem.styled";
+import closeBtn from "../../assets/x.svg";
 
 export const ModalLearnMore = ({ car, closeModal }) => {
   const {
@@ -26,8 +31,8 @@ export const ModalLearnMore = ({ car, closeModal }) => {
     model,
     year,
     img,
-    // rentalPrice,
-    // mileage,
+    rentalPrice,
+    mileage,
     type,
     functionalities,
     address,
@@ -35,9 +40,12 @@ export const ModalLearnMore = ({ car, closeModal }) => {
     engineSize,
     description,
     accessories,
-    // rentalConditions,
+    rentalConditions,
   } = car;
   const place = address?.split(", ");
+  const conditions = rentalConditions.split("\n");
+  const age = conditions[0].split(": ");
+  const price = parseInt(rentalPrice?.replace("$", ""));
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -65,13 +73,13 @@ export const ModalLearnMore = ({ car, closeModal }) => {
     };
   }, [closeModal]);
 
-  //   const onCancelButton = () => {
-  //     closeModal();
-  //   };
-
   return (
     <Backdrop onClick={onBackdropClick}>
       <Modal>
+        <CloseBtnWrap type="button" onClick={() => closeModal()}>
+          <img alt="" src={closeBtn}></img>;
+        </CloseBtnWrap>
+
         <CardModalContainer key={id}>
           <ImgDescriptionWrapper>
             <ModalImgWrapper>
@@ -101,8 +109,8 @@ export const ModalLearnMore = ({ car, closeModal }) => {
                 <Subtitle>Accessories and functionalities: </Subtitle>
                 <DescriptionListWrapper>
                   <DescriptionList>
-                    {accessories?.map((accesoire) => (
-                      <Item key={accesoire}>{accesoire}</Item>
+                    {accessories?.map((accessory) => (
+                      <Item key={accessory}>{accessory}</Item>
                     ))}
                   </DescriptionList>
                   <DescriptionList>
@@ -114,12 +122,28 @@ export const ModalLearnMore = ({ car, closeModal }) => {
               </Description>
               <Description>
                 <Subtitle>Rental Conditions:</Subtitle>
+                <DescriptionListWrapper $gap="8px">
+                  <RentalConditionsList>
+                    <RentalConditionsItem>
+                      {age[0]}: <Span>{age[1]}</Span>
+                    </RentalConditionsItem>
+                    <RentalConditionsItem>{conditions[1]}</RentalConditionsItem>
+                  </RentalConditionsList>
+                  <RentalConditionsList>
+                    <RentalConditionsItem>{conditions[2]}</RentalConditionsItem>
+                    <RentalConditionsItem>
+                      Mileage: <Span>{mileage}</Span>
+                    </RentalConditionsItem>
+                    <RentalConditionsItem>
+                      Price: <Span>{price}$</Span>
+                    </RentalConditionsItem>
+                  </RentalConditionsList>
+                </DescriptionListWrapper>
               </Description>
             </TotalDescriptionWrap>
           </ImgDescriptionWrapper>
-          {/* <BtnContainer>
-            <Btn>Learn more</Btn>
-          </BtnContainer> */}
+
+          <Button>Rental Car</Button>
         </CardModalContainer>
       </Modal>
     </Backdrop>

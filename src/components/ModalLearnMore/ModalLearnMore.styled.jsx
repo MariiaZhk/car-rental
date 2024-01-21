@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// import { GrClose } from "react-icons/gr";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -11,6 +12,7 @@ export const Backdrop = styled.div`
   height: 100vh;
   z-index: 10;
   background: rgba(18, 20, 23, 0.5);
+  backdrop-filter: blur(1px);
 `;
 
 export const Modal = styled.div`
@@ -22,7 +24,7 @@ export const Modal = styled.div`
   background-color: #fff;
   border-radius: 24px;
   width: 541px;
-  height: 752px;
+  /* height: 752px; */
 `;
 
 export const CardModalContainer = styled.div`
@@ -30,6 +32,7 @@ export const CardModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 24px;
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -49,7 +52,7 @@ export const ModalImgWrapper = styled.div`
   display: block;
   overflow: hidden;
   width: 100%;
-  height: 280px;
+  height: 250px;
   object-fit: cover;
   border-radius: 14px;
   background: #f3f3f2;
@@ -58,8 +61,14 @@ export const ModalImgWrapper = styled.div`
 export const Image = styled.img`
   position: absolute;
   width: 461px;
-  height: 100%;
-  background: #f3f3f2;
+  top: -40px;
+  right: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(18, 20, 23, 0.5) 2.5%,
+      rgba(18, 20, 23, 0) 41.07%
+    ),
+    #f3f3f2;
 `;
 
 export const TotalDescriptionWrap = styled.div`
@@ -92,4 +101,56 @@ export const Subtitle = styled.h4`
   font-weight: 500;
   line-height: 1.43;
   margin-bottom: 8px;
+`;
+
+export const RentalConditionsList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #363535;
+`;
+export const RentalConditionsItem = styled.li`
+  padding: 7px 14px;
+  border-radius: 35px;
+  background: #f9f9f9;
+`;
+
+export const Button = styled.button`
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  width: 168px;
+  height: 44px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #3470ff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  &:hover,
+  &:focus {
+    background: #0b44cd;
+  }
+`;
+
+// export const CloseBtn = styled(GrClose)`
+//   margin: 0;
+//   padding: 0;
+//   /* color: currentColor; */
+//   pointer-events: none;
+//   /* stroke: #121417; */
+//   stroke-width: 2px;
+// `;
+
+export const CloseBtnWrap = styled.svg`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  stroke: #121417;
 `;

@@ -59,6 +59,12 @@ export const TitleWrapper = styled.div`
   align-items: center;
 `;
 
+export const Title = styled.h3`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+`;
+
 export const Span = styled.span`
   color: #3470ff;
 `;
@@ -80,6 +86,13 @@ export const DescriptionList = styled.ul`
 
 export const Item = styled.li`
   display: flex;
+  &:not(:last-child)::after {
+    content: "|";
+    width: 1px;
+    height: 16px;
+    margin-left: 6px;
+    color: rgba(18, 20, 23, 0.1);
+  }
 `;
 
 export const Svg = styled.svg`
@@ -98,6 +111,7 @@ export const BtnContainer = styled.div`
 export const Btn = styled.button`
   /* position: absolute;
   bottom: 0; */
+  margin-top: auto;
   display: flex;
   justify-content: center;
   width: 100%;
