@@ -30,9 +30,7 @@ const carsSlice = createSlice({
     setFilterAction: (state, { payload }) => {
       state.filter = payload;
     },
-    // filterDelete(state, { payload }) {
-    //   state.filter = null;
-    // },
+
     setFilteredCars(state, { payload }) {
       state.filteredCars = payload;
     },
