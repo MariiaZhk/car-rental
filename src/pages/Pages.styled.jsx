@@ -74,7 +74,3 @@ export const OrderBtn = styled(Link)`
     background-color: #0b44cd;
   }
 `;
-export const Phone = styled.span`
-  padding-left: 10px;
-  color: #3470ff;
-`;

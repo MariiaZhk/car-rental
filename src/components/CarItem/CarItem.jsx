@@ -18,6 +18,7 @@ import { ModalLearnMore } from "../ModalLearnMore/ModalLearnMore";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFavoriteCar } from "../../redux/selectors";
 import { deleteFavoriteCar, setFavoriteCar } from "../../redux/sliceFavorites";
+import Heart from "../../assets/heart.svg";
 
 export const CarItem = ({ car }) => {
   const {
@@ -59,7 +60,7 @@ export const CarItem = ({ car }) => {
         <ImgWrapper>
           <Img src={img} alt={make} />
           <Svg onClick={onHeartClick}>
-            <use href="../../assets/heart.svg" />
+            <img src={Heart} alt="" />
           </Svg>
         </ImgWrapper>
 

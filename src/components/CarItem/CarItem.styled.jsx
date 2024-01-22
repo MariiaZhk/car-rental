@@ -95,12 +95,14 @@ export const Item = styled.li`
   }
 `;
 
-export const Svg = styled.svg`
+export const Svg = styled.button`
   position: absolute;
-  /* top: 14px;
-  right: 14px; */
-  /* stroke: #ffffff; */
   display: flex;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   width: 18px;
   height: 18px;
 `;

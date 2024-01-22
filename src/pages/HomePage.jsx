@@ -25,9 +25,7 @@ export const HomePage = () => {
               rental services stands out for the quality and good taste
             </Paragraph>
             <OrderBtn to="/catalog">Order now</OrderBtn>
-            <Paragraph>
-              Contact us: <Phone>+380730000000</Phone>
-            </Paragraph>
+            <Paragraph>Contact us: +380730000000</Paragraph>
           </TitleWrapper>
         </Wrapper>
       </Section>

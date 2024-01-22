@@ -3,7 +3,7 @@ import {
   Backdrop,
   Button,
   CardModalContainer,
-  CloseBtnWrap,
+  CloseBtn,
   Description,
   Image,
   ImgDescriptionWrapper,
@@ -76,9 +76,9 @@ export const ModalLearnMore = ({ car, closeModal }) => {
   return (
     <Backdrop onClick={onBackdropClick}>
       <Modal>
-        <CloseBtnWrap type="button" onClick={() => closeModal()}>
-          <img alt="" src={closeBtn}></img>;
-        </CloseBtnWrap>
+        <CloseBtn type="button" onClick={() => closeModal()}>
+          <img src={closeBtn} alt=""></img>
+        </CloseBtn>
 
         <CardModalContainer key={id}>
           <ImgDescriptionWrapper>

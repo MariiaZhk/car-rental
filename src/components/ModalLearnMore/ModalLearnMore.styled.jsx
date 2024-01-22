@@ -145,8 +145,10 @@ export const Button = styled.button`
 //   stroke-width: 2px;
 // `;
 
-export const CloseBtnWrap = styled.svg`
+export const CloseBtn = styled.button`
   position: absolute;
+  background: transparent;
+  border: none;
   width: 24px;
   height: 24px;
   top: 16px;
