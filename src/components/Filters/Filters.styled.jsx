@@ -54,30 +54,30 @@ export const selectStyle = {
   menu: (styles) => ({
     ...styles,
     width: "224px",
-    // height: "272px",
+    height: "272px",
     padding: "14px 8px 14px 18px",
     borderRadius: "14px",
     border: "1px solid rgba(18, 20, 23, 0.05)",
-    // background: "var(--color-text-button-and-back)",
-    // boxShadow: "0px 4px 36px 0px rgba(0, 0, 0, 0.02)",
-    "&:not(:last-child)": {
-      //   marginBottom: "8px",
-    },
+    fontFamily: "Manrope, sans-serif",
+    marginBottom: "8px",
   }),
   option: (styles, { isFocused, isSelected }) => {
     if (isFocused) {
       return {
         ...styles,
         color: "#121417",
+        backgroundColor: "transparent",
       };
     } else if (isSelected) {
       return {
         ...styles,
-        background: "transparent",
+        color: "#121417",
+        backgroundColor: "transparent",
       };
     } else {
       return {
         ...styles,
+        color: "rgba(18, 20, 23, 0.2)",
       };
     }
   },
@@ -88,8 +88,6 @@ export const selectStyle = {
     lineHeight: "1.25",
     fontWeight: "500",
     cursor: "pointer",
-    // padding: "0px",
-    // margin: "0px",
     height: "272px",
     overflowY: "auto",
     "&::-webkit-scrollbar": {
