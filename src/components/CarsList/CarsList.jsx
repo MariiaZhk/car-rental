@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllCarsThunk } from "../../redux/operations";
+import {
+  fetchAllCarsThunk,
+  fetchCarsPerPageThunk,
+} from "../../redux/operations";
 import {
   selectAllCars,
   selectFilter,
@@ -8,14 +11,15 @@ import {
   // selectFilteredCars,
 } from "../../redux/selectors";
 import { CarItem } from "../CarItem/CarItem";
-import { CarsListStyled } from "./CarsList.styled";
-import { BtnLoadMore } from "../../pages/Pages.styled";
-import { setFilteredCars } from "../../redux/slice";
+import { BtnLoadMore, CarsListStyled } from "./CarsList.styled";
+
+import { setFilterDelete, setFilteredCars } from "../../redux/slice";
 // import { selectAllCars } from "../../redux/selectors";
 
 export const CarsList = () => {
   const dispatch = useDispatch();
-  // const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [isLoadMore, setIsLoadMore] = useState(false);
   const allCars = useSelector(selectAllCars);
   const filteredCars = useSelector(selectFilteredCars);
   const filter = useSelector(selectFilter);
@@ -26,19 +30,30 @@ export const CarsList = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(fetchCarsPerPageThunk(page));
+  }, [dispatch, page]);
+
+  useEffect(() => {
     const mark = filter;
     const filterMarks =
       mark !== "all" && cars.filter((car) => car.make === mark);
 
     if (filter === null) {
       return;
+    }
+    if (mark === "all") {
+      dispatch(setFilterDelete());
+      return;
     } else {
-      if (mark !== "all") {
-        dispatch(setFilteredCars(filterMarks));
-      }
+      dispatch(setFilteredCars(filterMarks));
     }
   }, [cars, dispatch, filter]);
 
+  function onLoadMoreClick() {
+    const nextPage = page + 1;
+    setIsLoadMore(true);
+    setPage(nextPage);
+  }
   return (
     <>
       {filter !== null ? (
@@ -54,7 +69,12 @@ export const CarsList = () => {
           ))}
         </CarsListStyled>
       )}
-      <BtnLoadMore>Load more</BtnLoadMore>
+      <BtnLoadMore
+        onClick={onLoadMoreClick}
+        display={isLoadMore ? "none" : "block"}
+      >
+        Load more
+      </BtnLoadMore>
     </>
   );
 };

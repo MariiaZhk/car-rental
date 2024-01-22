@@ -1,8 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
 import {
   persistStore,
-  //   persistReducer,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -10,18 +9,21 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage";
 import { carsReducer } from "./slice";
+import { favoritesReducer } from "./sliceFavorites";
 
-// const persistConfig = {
-//   key: "auth",
-//   version: 1,
-//   storage,
-//   whitelist: ["token"],
-// };
+const persistConfig = {
+  key: "favorites",
+  storage,
+  whitelist: ["favorites"],
+};
+
+const persistedReducer = persistReducer(persistConfig, favoritesReducer);
 
 const rootReducer = combineReducers({
   cars: carsReducer,
+  favorites: persistedReducer,
 });
 
 export const store = configureStore({
@@ -32,7 +34,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  //   devTools: process.env.NODE_ENV !== "production",
+  // devTools: process.env.NODE_ENV !== "production",
 });
 
 export const persistor = persistStore(store);

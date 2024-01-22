@@ -6,7 +6,7 @@ const InitialState = {
   allCars: [],
   carsPerPage: [],
   carsMarks: [],
-  isLoading: false,
+  isLoadMore: false,
   error: null,
   filter: null,
   filteredCars: [],
@@ -34,6 +34,9 @@ const carsSlice = createSlice({
     setFilteredCars(state, { payload }) {
       state.filteredCars = payload;
     },
+    setFilterDelete(state) {
+      state.filter = null;
+    },
   },
 
   extraReducers: (builder) => {
@@ -57,5 +60,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { setFilterAction, setFilteredCars } = carsSlice.actions;
+export const { setFilterAction, setFilteredCars, setFilterDelete } =
+  carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

@@ -5,5 +5,22 @@ export const CarsListStyled = styled.ul`
   flex-wrap: wrap;
   row-gap: 50px;
   column-gap: 29px;
+  margin-top: ${(props) => props.$top || "50px"};
   margin-bottom: 100px;
+`;
+
+export const BtnLoadMore = styled.p`
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+  color: #3470ff;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration-line: underline;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #0b44cd;
+  }
 `;

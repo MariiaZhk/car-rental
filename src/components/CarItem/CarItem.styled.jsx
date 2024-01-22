@@ -97,9 +97,9 @@ export const Item = styled.li`
 
 export const Svg = styled.svg`
   position: absolute;
-  top: 14px;
-  right: 14px;
-  stroke: #ffffff;
+  /* top: 14px;
+  right: 14px; */
+  /* stroke: #ffffff; */
   display: flex;
   width: 18px;
   height: 18px;

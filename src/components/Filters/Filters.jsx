@@ -3,6 +3,7 @@ import { selectCarsMarks } from "../../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setFilterAction } from "../../redux/slice";
+import { Form, Label, SearchBtn, selectStyle } from "./Filters.styled";
 
 export const Filters = () => {
   const carsMarks = useSelector(selectCarsMarks);
@@ -10,29 +11,29 @@ export const Filters = () => {
   const [price, setPrice] = useState({ value: "All", label: "To $" });
   const dispatch = useDispatch();
 
-  const pricesArr = [{ value: "all", label: "All" }];
-  for (let index = 10; index <= 300; index += 10) {
-    pricesArr.push({ value: index, label: index });
-  }
+  // const pricesArr = [{ value: "all", label: "All" }];
+  // for (let index = 10; index <= 300; index += 10) {
+  //   pricesArr.push({ value: index, label: index });
+  // }
 
-  const onSearch = () => {
+  const onSearchClick = () => {
     const filter = mark.value;
-    //   price: price.value,
     dispatch(setFilterAction(filter));
   };
 
   return (
-    <form>
-      <label>
+    <Form>
+      <Label>
         Car brand
         <Select
           options={carsMarks}
           onChange={setMark}
           placeholder="Enter the text"
           value={mark}
+          styles={selectStyle}
         />
-      </label>
-      <label>
+      </Label>
+      {/* <label>
         Price/ 1 hour
         <Select
           onChange={setPrice}
@@ -40,10 +41,10 @@ export const Filters = () => {
           placeholder=""
           value={price}
         />
-      </label>
-      <button type="button" onClick={onSearch}>
+      </label> */}
+      <SearchBtn type="button" onClick={onSearchClick}>
         Search
-      </button>
-    </form>
+      </SearchBtn>
+    </Form>
   );
 };

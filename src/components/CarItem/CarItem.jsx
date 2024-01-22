@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Btn,
   BtnContainer,
@@ -15,6 +15,9 @@ import {
   TitleWrapper,
 } from "./CarItem.styled";
 import { ModalLearnMore } from "../ModalLearnMore/ModalLearnMore";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFavoriteCar } from "../../redux/selectors";
+import { deleteFavoriteCar, setFavoriteCar } from "../../redux/sliceFavorites";
 
 export const CarItem = ({ car }) => {
   const {
@@ -29,19 +32,37 @@ export const CarItem = ({ car }) => {
     functionalities,
     address,
   } = car;
-  const place = address?.split(", ");
 
+  const dispatch = useDispatch();
+  const place = address?.split(", ");
   const [isModalLearnMoreOpen, setIsModalLearnMoreOpen] = useState(false);
+  const favoriteCars = useSelector(selectFavoriteCar);
+  const [isCarFavorite, setIsCarFavorite] = useState(false);
+
+  useEffect(() => {
+    if (favoriteCars?.some((car) => car.id === id)) {
+      setIsCarFavorite(true);
+    } else {
+      setIsCarFavorite(false);
+    }
+  }, [favoriteCars, id]);
+
+  const onHeartClick = () => {
+    isCarFavorite
+      ? dispatch(deleteFavoriteCar(id))
+      : dispatch(setFavoriteCar(car));
+  };
 
   return (
     <CarItemStyled key={id}>
       <CardContainer>
         <ImgWrapper>
           <Img src={img} alt={make} />
+          <Svg onClick={onHeartClick}>
+            <use href="../../assets/heart.svg" />
+          </Svg>
         </ImgWrapper>
-        <Svg>
-          <use href="sprite.svg#icon-heart" />
-        </Svg>
+
         <CarDescriptionWrapper>
           <TitleWrapper>
             <h3>
