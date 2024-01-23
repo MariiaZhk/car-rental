@@ -12,6 +12,7 @@ import { setFilterDelete, setFilteredCars } from "../../redux/slice";
 import { CarItem } from "../CarItem/CarItem";
 import { BtnLoadMore, CarsListStyled } from "./CarsList.styled";
 import { Loader } from "../Loader/Loader";
+import { toast } from "react-toastify";
 
 export const CarsList = () => {
   const dispatch = useDispatch();
@@ -25,22 +26,10 @@ export const CarsList = () => {
   const carsPerPage = useSelector(selectCarsPerPage);
 
   useEffect(() => {
-    dispatch(fetchCarsPerPageThunk(page));
+    dispatch(fetchCarsPerPageThunk(page))
+      .unwrap()
+      .catch((err) => toast.error(err));
   }, [dispatch, page]);
-
-  // useEffect(() => {
-  //   if (!filter) {
-  //     return;
-  //   }
-  //   if (filter === "all") {
-  //     dispatch(setFilterDelete());
-  //     return;
-  //   }
-
-  //   const filterBrands =
-  //     filter !== "all" && allCars.filter((car) => car.make === filter);
-  //   dispatch(setFilteredCars(filterBrands));
-  // }, [allCars, dispatch, filter]);
 
   useEffect(() => {
     if (!filter) {
@@ -56,14 +45,6 @@ export const CarsList = () => {
     }
   }, [allCars, dispatch, filter]);
 
-  // const onLoadMoreClick = () => {
-  //   if (carsPerPage.length < allCars.length) {
-  //     setIsLoadMore(true);
-  //     setPage(page + 1);
-  //   } else {
-  //     setIsLoadMore(false);
-  //   }
-  // };
   const onLoadMoreClick = () => {
     const carsToLoad = filter === "all" ? LIMIT : carsPerPage.length + LIMIT;
 

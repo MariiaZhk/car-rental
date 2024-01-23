@@ -1,6 +1,5 @@
 import Select from "react-select";
-// import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { selectAllCars } from "../../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -12,12 +11,16 @@ export const Filters = () => {
   const [brandsList, setBrandsList] = useState({});
 
   const [brand, setBrand] = useState(null);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
   const dispatch = useDispatch();
   const allCars = useSelector(selectAllCars);
 
   useEffect(() => {
-    dispatch(fetchAllCarsThunk());
+    dispatch(fetchAllCarsThunk())
+      .unwrap()
+      .catch((err) => {
+        toast.error(err);
+      });
   }, [dispatch]);
 
   useEffect(() => {
@@ -40,22 +43,17 @@ export const Filters = () => {
     getCarsBrands();
   }, [allCars]);
 
-  // const handleBrandChange = (selectedBrand) => {
-  //   setBrand(selectedBrand);
-  //   if (!selectedBrand) {
-  //     toast.error("Please select a car brand.");
-  //   }
-  // };
-
   const handleBrandChange = (selectedBrand) => {
     setBrand(selectedBrand);
-    setError(selectedBrand ? "" : "Please select a car brand.");
+    // setError(selectedBrand ? "" : toast.info("Please select a car brand."));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!brand) {
-      setError("Please select a car brand.");
+      // setError(toast.info("Please select a car brand."));
+      toast.info("Please select a car brand.");
+
       return;
     }
     const filter = brand.value;
@@ -75,7 +73,6 @@ export const Filters = () => {
           isSearchable={false}
         />
       </Label>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <SearchBtn type="submit">Submit</SearchBtn>
     </Form>
   );
