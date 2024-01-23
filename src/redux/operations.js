@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://65aa7717081bd82e1d9704f3.mockapi.io";
 
-export const PerPage = 12;
+export const LIMIT = 12;
 
 export const fetchAllCarsThunk = createAsyncThunk(
   "cars/fetchAll",
@@ -21,9 +21,7 @@ export const fetchCarsPerPageThunk = createAsyncThunk(
   "cars/fetchPerPage",
   async (page, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `/adverts?page=${page}&limit=${PerPage}`
-      );
+      const response = await axios.get(`/adverts?page=${page}&limit=${LIMIT}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

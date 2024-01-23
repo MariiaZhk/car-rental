@@ -1,3 +1,4 @@
+// import { lazy } from "react";
 import { Layout } from "./Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "../pages/HomePage";

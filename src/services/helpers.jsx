@@ -1,16 +1,16 @@
-export function getCarsMarks(payload) {
-  const marks = [];
-  payload?.map((car) => {
-    marks.push(car.make);
-  });
-  const uniqueMarks = marks.filter(
-    (mark, index, array) => array.indexOf(mark) === index
-  );
-  const uniqueMarksObj = [
-    { value: "all", label: "All" },
-    ...uniqueMarks.map((mark) => {
-      return { value: mark, label: mark };
-    }),
-  ];
-  return uniqueMarksObj;
-}
+// export function getCarsBrands(payload) {
+//   const brands = [];
+//   payload?.map((car) => {
+//     brands.push(car.make);
+//   });
+//   const uniqueBrands = brands.filter(
+//     (brand, index, array) => array.indexOf(brand) === index
+//   );
+//   const uniqueBrandsObj = [
+//     { value: "all", label: "All" },
+//     ...uniqueBrands.map((brand) => {
+//       return { value: brand, label: brand };
+//     }),
+//   ];
+//   return uniqueBrandsObj;
+// }

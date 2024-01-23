@@ -24,7 +24,7 @@ export const selectStyle = {
     ...styles,
     width: "224px",
     height: "48px",
-    background: "#F7F7FB;",
+    background: "#F7F7FB",
     borderRadius: "14px",
     border: "none",
     outline: "none",
@@ -32,6 +32,7 @@ export const selectStyle = {
     fontWeight: "500",
     lineHeight: "1.11",
     cursor: "pointer",
+    paddingLeft: "10px",
 
     "&:hover": {
       border: "none",
@@ -40,26 +41,30 @@ export const selectStyle = {
   }),
   singleValue: (styles) => ({
     ...styles,
+    color: "#121417",
     lineHeight: "1.11",
+    fontWeight: "500",
     fontSize: "18px",
   }),
   placeholder: (styles) => ({
     ...styles,
+    color: "#121417",
     fontSize: "18px",
     fontWeight: "500",
     lineHeight: "1.11",
-    margin: "0px",
-    padding: "0px",
   }),
   menu: (styles) => ({
     ...styles,
     width: "224px",
     height: "272px",
-    padding: "14px 8px 14px 18px",
+    padding: "8px 8px 10px 0px",
     borderRadius: "14px",
     border: "1px solid rgba(18, 20, 23, 0.05)",
     fontFamily: "Manrope, sans-serif",
-    marginBottom: "8px",
+    color: "rgba(18, 20, 23, 0.20)",
+    ontSize: "16px",
+    fontWeight: "500",
+    lineHeight: "1.25",
   }),
   option: (styles, { isFocused, isSelected }) => {
     if (isFocused) {
@@ -67,12 +72,14 @@ export const selectStyle = {
         ...styles,
         color: "#121417",
         backgroundColor: "transparent",
+        cursor: "pointer",
       };
     } else if (isSelected) {
       return {
         ...styles,
         color: "#121417",
         backgroundColor: "transparent",
+        cursor: "pointer",
       };
     } else {
       return {
@@ -90,6 +97,8 @@ export const selectStyle = {
     cursor: "pointer",
     height: "272px",
     overflowY: "auto",
+    padding: "0px 8px 8px 10px",
+
     "&::-webkit-scrollbar": {
       width: "8px",
     },

@@ -12,6 +12,7 @@ export const CarsListStyled = styled.ul`
 export const BtnLoadMore = styled.p`
   display: block;
   margin: 0 auto;
+  margin-bottom: 50px;
   padding: 20px;
   color: #3470ff;
   font-size: 16px;

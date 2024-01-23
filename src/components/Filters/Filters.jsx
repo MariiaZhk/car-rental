@@ -1,42 +1,82 @@
 import Select from "react-select";
-import { selectCarsMarks } from "../../redux/selectors";
+// import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { selectAllCars } from "../../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setFilterAction } from "../../redux/slice";
 import { Form, Label, SearchBtn, selectStyle } from "./Filters.styled";
 import { fetchAllCarsThunk } from "../../redux/operations";
+import { setFilterAction } from "../../redux/slice";
 
 export const Filters = () => {
-  const carsMarks = useSelector(selectCarsMarks);
-  const [mark, setMark] = useState({ value: "All", label: "Enter the text" });
+  const [brandsList, setBrandsList] = useState({});
+
+  const [brand, setBrand] = useState(null);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const allCars = useSelector(selectAllCars);
 
   useEffect(() => {
     dispatch(fetchAllCarsThunk());
   }, [dispatch]);
 
-  const onSearchClick = () => {
-    const filter = mark.value;
+  useEffect(() => {
+    function getCarsBrands() {
+      const brands = [];
+      allCars?.map((car) => {
+        brands.push(car.make);
+      });
+      const uniqueBrands = brands.filter(
+        (brand, index, array) => array.indexOf(brand) === index
+      );
+      const uniqueBrandsObj = [
+        { value: "all", label: "All" },
+        ...uniqueBrands.map((brand) => {
+          return { value: brand, label: brand };
+        }),
+      ];
+      setBrandsList(uniqueBrandsObj);
+    }
+    getCarsBrands();
+  }, [allCars]);
+
+  // const handleBrandChange = (selectedBrand) => {
+  //   setBrand(selectedBrand);
+  //   if (!selectedBrand) {
+  //     toast.error("Please select a car brand.");
+  //   }
+  // };
+
+  const handleBrandChange = (selectedBrand) => {
+    setBrand(selectedBrand);
+    setError(selectedBrand ? "" : "Please select a car brand.");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!brand) {
+      setError("Please select a car brand.");
+      return;
+    }
+    const filter = brand.value;
     dispatch(setFilterAction(filter));
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Label>
         Car brand
         <Select
-          options={carsMarks}
-          onChange={setMark}
+          options={brandsList}
+          onChange={handleBrandChange}
           placeholder="Enter the text"
-          value={mark}
+          value={brand}
           styles={selectStyle}
           isSearchable={false}
         />
       </Label>
-
-      <SearchBtn type="button" onClick={onSearchClick}>
-        Search
-      </SearchBtn>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <SearchBtn type="submit">Submit</SearchBtn>
     </Form>
   );
 };

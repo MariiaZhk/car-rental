@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllCarsThunk, fetchCarsPerPageThunk } from "./operations";
-import { getCarsMarks } from "../services/helpers";
 
 const InitialState = {
   allCars: [],
   carsPerPage: [],
-  carsMarks: [],
   isLoading: false,
   error: null,
   filter: null,
@@ -45,7 +43,6 @@ const carsSlice = createSlice({
       .addCase(fetchAllCarsThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.allCars = payload;
-        state.carsMarks = getCarsMarks(payload);
         state.error = null;
       })
       .addCase(fetchAllCarsThunk.rejected, onRejected)
@@ -53,7 +50,12 @@ const carsSlice = createSlice({
       .addCase(fetchCarsPerPageThunk.pending, onPending)
       .addCase(fetchCarsPerPageThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.carsPerPage = [...state.carsPerPage, ...payload];
+        const uniqueCars = payload.filter(
+          (car) =>
+            !state.carsPerPage.some((existingCar) => existingCar.id === car.id)
+        );
+
+        state.carsPerPage = [...state.carsPerPage, ...uniqueCars];
         state.error = null;
       })
       .addCase(fetchCarsPerPageThunk.rejected, onRejected);

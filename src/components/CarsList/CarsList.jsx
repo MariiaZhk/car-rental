@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCarsPerPageThunk } from "../../redux/operations";
+import { LIMIT, fetchCarsPerPageThunk } from "../../redux/operations";
 import {
   selectAllCars,
   selectCarsPerPage,
@@ -16,9 +16,10 @@ import { Loader } from "../Loader/Loader";
 export const CarsList = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const [isLoadMore, setIsLoadMore] = useState(false);
+  const [isLoadMore, setIsLoadMore] = useState(true);
   const isLoading = useSelector(selectIsLoading);
   const allCars = useSelector(selectAllCars);
+
   const filteredCars = useSelector(selectFilteredCars);
   const filter = useSelector(selectFilter);
   const carsPerPage = useSelector(selectCarsPerPage);
@@ -27,28 +28,52 @@ export const CarsList = () => {
     dispatch(fetchCarsPerPageThunk(page));
   }, [dispatch, page]);
 
+  // useEffect(() => {
+  //   if (!filter) {
+  //     return;
+  //   }
+  //   if (filter === "all") {
+  //     dispatch(setFilterDelete());
+  //     return;
+  //   }
+
+  //   const filterBrands =
+  //     filter !== "all" && allCars.filter((car) => car.make === filter);
+  //   dispatch(setFilteredCars(filterBrands));
+  // }, [allCars, dispatch, filter]);
+
   useEffect(() => {
     if (!filter) {
       return;
     }
     if (filter === "all") {
       dispatch(setFilterDelete());
-      return;
+      setPage(1);
+      setIsLoadMore(true);
+    } else {
+      const filterBrands = allCars.filter((car) => car.make === filter);
+      dispatch(setFilteredCars(filterBrands));
     }
-    const filterMarks =
-      filter !== "all" && allCars.filter((car) => car.make === filter);
-
-    dispatch(setFilteredCars(filterMarks));
   }, [allCars, dispatch, filter]);
 
+  // const onLoadMoreClick = () => {
+  //   if (carsPerPage.length < allCars.length) {
+  //     setIsLoadMore(true);
+  //     setPage(page + 1);
+  //   } else {
+  //     setIsLoadMore(false);
+  //   }
+  // };
   const onLoadMoreClick = () => {
-    const totalPage = allCars.length / 12;
-    if (page === totalPage - 1) {
-      setIsLoadMore(true);
-    }
-    setPage(page + 1);
-  };
+    const carsToLoad = filter === "all" ? LIMIT : carsPerPage.length + LIMIT;
 
+    if (carsToLoad <= allCars.length) {
+      setIsLoadMore(true);
+      setPage(page + 1);
+    } else {
+      setIsLoadMore(false);
+    }
+  };
   return (
     <>
       {isLoading && <Loader />}
@@ -60,13 +85,18 @@ export const CarsList = () => {
         </CarsListStyled>
       ) : (
         <CarsListStyled>
-          {carsPerPage.map((car) => (
+          {carsPerPage?.map((car) => (
             <CarItem car={car} key={car.id}></CarItem>
           ))}
         </CarsListStyled>
       )}
       {isLoadMore && (
-        <BtnLoadMore onClick={onLoadMoreClick}>Load more</BtnLoadMore>
+        <BtnLoadMore
+          onClick={onLoadMoreClick}
+          style={{ display: isLoadMore ? "block" : "none" }}
+        >
+          Load more
+        </BtnLoadMore>
       )}
     </>
   );
