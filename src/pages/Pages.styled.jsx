@@ -27,7 +27,7 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 5px;
   width: 900px;
-  padding: 120px;
+  padding: 120px 0;
   border-radius: 20px;
 `;
 
@@ -73,4 +73,12 @@ export const OrderBtn = styled(Link)`
   &:focus {
     background-color: #0b44cd;
   }
+`;
+export const Warning = styled.div`
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-size: 24px;
 `;

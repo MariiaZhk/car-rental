@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { GrClose } from "react-icons/gr";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -135,15 +134,6 @@ export const Button = styled.button`
     background: #0b44cd;
   }
 `;
-
-// export const CloseBtn = styled(GrClose)`
-//   margin: 0;
-//   padding: 0;
-//   /* color: currentColor; */
-//   pointer-events: none;
-//   /* stroke: #121417; */
-//   stroke-width: 2px;
-// `;
 
 export const CloseBtn = styled.button`
   position: absolute;

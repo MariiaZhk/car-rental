@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { CarItem } from "../components/CarItem/CarItem";
 import { CarsListStyled } from "../components/CarsList/CarsList.styled";
 import { selectFavoriteCar } from "../redux/selectors";
-import { Container, Section } from "./Pages.styled";
+import { Container, Section, Warning } from "./Pages.styled";
 
 export const FavoritesPage = () => {
   const favoriteCars = useSelector(selectFavoriteCar);
@@ -17,7 +17,9 @@ export const FavoritesPage = () => {
             ))}
           </CarsListStyled>
         ) : (
-          <p>Please select your favorite cars.</p>
+          <Warning>
+            <h2>Choose your favorite cars in the catalog.</h2>
+          </Warning>
         )}
       </Section>
     </Container>

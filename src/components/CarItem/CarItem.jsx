@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFavoriteCar } from "../../redux/selectors";
+import { deleteFavoriteCar, setFavoriteCar } from "../../redux/sliceFavorites";
+import { ModalLearnMore } from "../ModalLearnMore/ModalLearnMore";
+import Heart from "../../assets/heart.svg";
+import HeartFavorite from "../../assets/heart-favorite.svg";
 import {
   Btn,
   BtnContainer,
@@ -7,18 +13,13 @@ import {
   CardContainer,
   DescriptionList,
   DescriptionListWrapper,
+  HeartBtn,
   Img,
   ImgWrapper,
   Item,
   Span,
-  Svg,
   TitleWrapper,
 } from "./CarItem.styled";
-import { ModalLearnMore } from "../ModalLearnMore/ModalLearnMore";
-import { useDispatch, useSelector } from "react-redux";
-import { selectFavoriteCar } from "../../redux/selectors";
-import { deleteFavoriteCar, setFavoriteCar } from "../../redux/sliceFavorites";
-import Heart from "../../assets/heart.svg";
 
 export const CarItem = ({ car }) => {
   const {
@@ -35,7 +36,6 @@ export const CarItem = ({ car }) => {
   } = car;
 
   const dispatch = useDispatch();
-  const place = address?.split(", ");
   const [isModalLearnMoreOpen, setIsModalLearnMoreOpen] = useState(false);
   const favoriteCars = useSelector(selectFavoriteCar);
   const [isCarFavorite, setIsCarFavorite] = useState(false);
@@ -48,20 +48,26 @@ export const CarItem = ({ car }) => {
     }
   }, [favoriteCars, id]);
 
-  const onHeartClick = () => {
-    isCarFavorite
-      ? dispatch(deleteFavoriteCar(id))
-      : dispatch(setFavoriteCar(car));
-  };
+  function onHeartBtnClick() {
+    if (!isCarFavorite) {
+      dispatch(setFavoriteCar(car));
+    } else {
+      dispatch(deleteFavoriteCar(id));
+    }
+  }
 
   return (
     <CarItemStyled key={id}>
       <CardContainer>
         <ImgWrapper>
           <Img src={img} alt={make} />
-          <Svg onClick={onHeartClick}>
-            <img src={Heart} alt="" />
-          </Svg>
+          <HeartBtn onClick={onHeartBtnClick}>
+            {isCarFavorite ? (
+              <img src={HeartFavorite} alt="" />
+            ) : (
+              <img src={Heart} alt="" />
+            )}
+          </HeartBtn>
         </ImgWrapper>
 
         <CarDescriptionWrapper>
@@ -73,8 +79,8 @@ export const CarItem = ({ car }) => {
           </TitleWrapper>
           <DescriptionListWrapper>
             <DescriptionList>
-              <Item>{place[1]}</Item>
-              <Item>{place[2]}</Item>
+              <Item>{address.split(",")[1]}</Item>
+              <Item>{address.split(",")[2]}</Item>
               <Item>{rentalCompany}</Item>
               <Item>Premium</Item>
             </DescriptionList>

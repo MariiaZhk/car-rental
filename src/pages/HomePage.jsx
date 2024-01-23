@@ -3,7 +3,6 @@ import {
   Container,
   OrderBtn,
   Paragraph,
-  Phone,
   Section,
   Subtitle,
   Title,

@@ -6,7 +6,7 @@ const InitialState = {
   allCars: [],
   carsPerPage: [],
   carsMarks: [],
-  isLoadMore: false,
+  isLoading: false,
   error: null,
   filter: null,
   filteredCars: [],

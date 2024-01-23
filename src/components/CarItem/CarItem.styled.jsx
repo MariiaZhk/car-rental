@@ -95,24 +95,28 @@ export const Item = styled.li`
   }
 `;
 
-export const Svg = styled.button`
+export const HeartBtn = styled.button`
   position: absolute;
   display: flex;
   top: 14px;
   right: 14px;
   background: transparent;
   border: none;
+
   cursor: pointer;
   width: 18px;
   height: 18px;
+`;
+
+export const Svg = styled.svg`
+  fill: ${(props) => props.fill || "transparent"};
+  stroke: ${(props) => props.stroke || "#fffff"};
 `;
 
 export const BtnContainer = styled.div`
   display: flex;
 `;
 export const Btn = styled.button`
-  /* position: absolute;
-  bottom: 0; */
   margin-top: auto;
   display: flex;
   justify-content: center;

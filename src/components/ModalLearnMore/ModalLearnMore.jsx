@@ -42,7 +42,7 @@ export const ModalLearnMore = ({ car, closeModal }) => {
     accessories,
     rentalConditions,
   } = car;
-  const place = address?.split(", ");
+
   const conditions = rentalConditions.split("\n");
   const age = conditions[0].split(": ");
   const price = parseInt(rentalPrice?.replace("$", ""));
@@ -92,8 +92,8 @@ export const ModalLearnMore = ({ car, closeModal }) => {
                 </TitleModal>
                 <DescriptionListWrapper>
                   <DescriptionList>
-                    <Item>{place[1]}</Item>
-                    <Item>{place[2]}</Item>
+                    <Item>{address.split(",")[1]}</Item>
+                    <Item>{address.split(",")[2]}</Item>
                     <Item>{id}</Item>
                     <Item>Year: {year}</Item>
                     <Item>Type: {type}</Item>
@@ -132,7 +132,7 @@ export const ModalLearnMore = ({ car, closeModal }) => {
                   <RentalConditionsList>
                     <RentalConditionsItem>{conditions[2]}</RentalConditionsItem>
                     <RentalConditionsItem>
-                      Mileage: <Span>{mileage}</Span>
+                      Mileage: <Span>{mileage.toLocaleString("en-US")}</Span>
                     </RentalConditionsItem>
                     <RentalConditionsItem>
                       Price: <Span>{price}$</Span>
@@ -143,7 +143,9 @@ export const ModalLearnMore = ({ car, closeModal }) => {
             </TotalDescriptionWrap>
           </ImgDescriptionWrapper>
 
-          <Button>Rental Car</Button>
+          <Button onClick={() => (window.location.href = "tel:+380730000000")}>
+            Rental Car
+          </Button>
         </CardModalContainer>
       </Modal>
     </Backdrop>
