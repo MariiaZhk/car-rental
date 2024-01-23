@@ -8,7 +8,7 @@ import {
   selectFilteredCars,
   selectIsLoading,
 } from "../../redux/selectors";
-import { setFilterDelete, setFilteredCars } from "../../redux/slice";
+import { setFilterDelete, setFilteredCars } from "../../redux/sliceCars";
 import { CarItem } from "../CarItem/CarItem";
 import { BtnLoadMore, CarsListStyled } from "./CarsList.styled";
 import { Loader } from "../Loader/Loader";

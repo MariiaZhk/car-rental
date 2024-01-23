@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { carsReducer } from "./slice";
+import { carsReducer } from "./sliceCars";
 import { favoritesReducer } from "./sliceFavorites";
 
 const persistConfig = {

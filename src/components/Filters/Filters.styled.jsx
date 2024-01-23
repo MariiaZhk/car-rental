@@ -17,8 +17,6 @@ export const Label = styled.label`
   line-height: 1.29;
 `;
 
-// ==============
-
 export const selectStyle = {
   control: (styles) => ({
     ...styles,
@@ -118,6 +116,8 @@ export const selectStyle = {
     ...defaultStyles,
     paddingRight: "18px",
     color: "#121417",
+
+    cursor: "pointer",
   }),
 };
 

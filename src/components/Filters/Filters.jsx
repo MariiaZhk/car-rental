@@ -5,13 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Form, Label, SearchBtn, selectStyle } from "./Filters.styled";
 import { fetchAllCarsThunk } from "../../redux/operations";
-import { setFilterAction } from "../../redux/slice";
+import { setFilterAction } from "../../redux/sliceCars";
 
 export const Filters = () => {
   const [brandsList, setBrandsList] = useState({});
 
   const [brand, setBrand] = useState(null);
-  const [setError] = useState("");
   const dispatch = useDispatch();
   const allCars = useSelector(selectAllCars);
 
@@ -45,15 +44,12 @@ export const Filters = () => {
 
   const handleBrandChange = (selectedBrand) => {
     setBrand(selectedBrand);
-    // setError(selectedBrand ? "" : toast.info("Please select a car brand."));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!brand) {
-      // setError(toast.info("Please select a car brand."));
-      toast.info("Please select a car brand.");
-
+      toast.info("Please select a car brand.", { theme: "dark" });
       return;
     }
     const filter = brand.value;
@@ -70,7 +66,7 @@ export const Filters = () => {
           placeholder="Enter the text"
           value={brand}
           styles={selectStyle}
-          isSearchable={false}
+          isSearchable
         />
       </Label>
       <SearchBtn type="submit">Submit</SearchBtn>

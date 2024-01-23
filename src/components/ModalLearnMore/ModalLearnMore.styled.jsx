@@ -23,7 +23,6 @@ export const Modal = styled.div`
   background-color: #fff;
   border-radius: 24px;
   width: 541px;
-  /* height: 752px; */
 `;
 
 export const CardModalContainer = styled.div`
