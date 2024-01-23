@@ -60,7 +60,7 @@ export const CarItem = ({ car }) => {
     <CarItemStyled key={id}>
       <CardContainer>
         <ImgWrapper>
-          <Img src={img} alt={make} />
+          <Img src={img} alt={make} loading="lazy" />
           <HeartBtn onClick={onHeartBtnClick}>
             {isCarFavorite ? (
               <img src={HeartFavorite} alt="" />
