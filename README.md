@@ -22,8 +22,8 @@ Welcome to the Car Rental Website, your destination for browsing a diverse selec
 
 ## Links
 
-1. GitHub repository: `https://github.com/MariiaZhk/car-rental`
-2. Live page: `https://mariiazhk.github.io/car-rental/`
+1. GitHub repository: [https://github.com/MariiaZhk/car-rental](https://github.com/MariiaZhk/car-rental)
+2. Web page: [https://mariiazhk.github.io/car-rental/](https://mariiazhk.github.io/car-rental/)
 
 ## Tech Stack
 
